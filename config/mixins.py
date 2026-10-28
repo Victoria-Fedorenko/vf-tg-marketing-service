@@ -4,13 +4,18 @@ from django.contrib import messages
 from django.contrib.auth.mixins import AccessMixin
 from django.contrib.messages import add_message
 from django.core.exceptions import ImproperlyConfigured, PermissionDenied
-from django.http import HttpRequest, HttpResponseBase, HttpResponseRedirect, HttpResponseForbidden
-from django.shortcuts import redirect, get_object_or_404
+from django.http import (
+    HttpRequest,
+    HttpResponseBase,
+    HttpResponseForbidden,
+    HttpResponseRedirect,
+)
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from guardian.utils import get_anonymous_user
 
-
 from apps.group_channels.models import Group
+
 
 class CheckingUserRolesMixin:
     """
@@ -36,7 +41,7 @@ class CheckingUserRolesMixin:
             return True
         else:
             return False
-        
+
 
 class GroupOwnerRequiredMixin:
     """

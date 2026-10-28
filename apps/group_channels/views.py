@@ -1,6 +1,7 @@
 from typing import Any
+
 from django.conf import settings
-from django.http import HttpRequest, HttpResponse, HttpResponseForbidden
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic.base import View
 from inertia import render as inertia_render
@@ -15,7 +16,7 @@ from apps.group_channels.services.collections_catalog_service import (
     CollectionsCatalogService,
 )
 from apps.parser.models import TelegramChannel
-from config.mixins import UserAuthenticationCheckMixin, GroupOwnerRequiredMixin
+from config.mixins import GroupOwnerRequiredMixin, UserAuthenticationCheckMixin
 
 # константа для дефолтной аватарки
 DEFAULT_AVATAR_GROUP = f"{settings.STATIC_URL}default_avatar_group.jpg"
@@ -54,7 +55,9 @@ class CreateGroupView(UserAuthenticationCheckMixin, View):
         )
 
 
-class UpdateGroupView(UserAuthenticationCheckMixin, GroupOwnerRequiredMixin, View):
+class UpdateGroupView(
+    UserAuthenticationCheckMixin, GroupOwnerRequiredMixin, View
+):
     def post(
         self, request: HttpRequest, *args: Any, **kwargs: Any
     ) -> HttpResponse:
@@ -81,7 +84,9 @@ class UpdateGroupView(UserAuthenticationCheckMixin, GroupOwnerRequiredMixin, Vie
         )
 
 
-class DeleteGroupView(UserAuthenticationCheckMixin, GroupOwnerRequiredMixin, View):
+class DeleteGroupView(
+    UserAuthenticationCheckMixin, GroupOwnerRequiredMixin, View
+):
     def post(
         self, request: HttpRequest, *args: Any, **kwargs: Any
     ) -> HttpResponse:
@@ -157,7 +162,9 @@ class GroupDetailView(View):
         )
 
 
-class AddChannelsView(UserAuthenticationCheckMixin, GroupOwnerRequiredMixin, View):
+class AddChannelsView(
+    UserAuthenticationCheckMixin, GroupOwnerRequiredMixin, View
+):
     # На стороне фронта нет компонента groep_detaile,
     # бронируем название компонента GroupDetail
     def post(self, request: HttpRequest, slug: str) -> HttpResponse:

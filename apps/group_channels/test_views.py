@@ -33,6 +33,7 @@ class CreateGroupViewTest(TestCase):
         self.assertEqual(data["props"]["group"], {"name": group.name})
         self.assertTrue(data["props"]["flash"]["success"])
 
+
 class GroupOwnerAccessTest(TestCase):
     """
     Защита от IDOR на update / delete / add-channels:
